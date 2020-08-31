@@ -12,7 +12,7 @@ RUN sed -i "s/dl-cdn.alpinelinux.org/mirror.neolabs.kz/g" \
 # Add build dependencies
     && apk --no-cache add --virtual .build-deps \
     tzdata libffi-dev gcc g++ curl-dev libressl-dev \
-    musl-dev make \
+    musl-dev python3-dev make \
 # Upgrade pip
     && pip install --upgrade pip \
 # Add project dependencies
