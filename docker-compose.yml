@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  postgres:
+    container_name: postgres_s2
+    image: postgis/postgis:12-3.0-alpine
+    #logging:
+    #  driver: none
+    volumes:
+      - ./postgres:/var/lib/postgresql/data:rw
+    environment:
+      POSTGRES_DB: song2
+      POSTGRES_USER: song2
+      POSTGRES_PASSWORD: wqYidjcnmzmZcmsd18
+
+  django:
+    container_name: django_s2
+    build: ./
+    volumes:
+      - ./src:/src:rw
+      - ./.env:/src/core/.env
+    environment:
+      MODE: DEV
+      makemigrations: python manage.py makemigrations
+    depends_on:
+      - postgres
+    ports:
+      - 8000:8000
